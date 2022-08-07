@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Posts from './components/Posts.js';
+import Login from './components/Login.js';
+import useLocalStorage from './hooks/useLocalStorage.js';
+import LoginProvider from './contexts/LoginProvider.js';
+import { UserNavbar } from './components/UserNavbar.js';
+import PostsProvider from './contexts/PostsProvider.js';
+
+
 
 function App() {
+  const [currentId, setCurrentId] = useLocalStorage('currentId')
+  const [users, setUsers] = useLocalStorage('users')
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <LoginProvider currentId={currentId}>
+        <PostsProvider currentId={currentId}>
+          <UserNavbar onSignOut={(e) => setCurrentId(e)}/>
+          {
+            currentId ? 
+            <Posts /> : 
+            <Login onSubmit={setCurrentId}/>
+          }
+
+        </PostsProvider>
+        
+      </LoginProvider>
+
+    </>
+    
+      
   );
 }
 

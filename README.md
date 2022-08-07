@@ -1,3 +1,7 @@
+# This is a Photo App for JS practice projects
+
+I used ReactJS to create an app that allows users to add photo URL, create different accounts, login, and liking the posts. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
